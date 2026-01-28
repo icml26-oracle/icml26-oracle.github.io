@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -6,36 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>GoodDrag</title>
+    <title>MSEF - Oracle Bone Decipherment</title>
 
-    <meta property="og:title" content="GoodDrag: Towards Good Practices for Drag Editing with Diffusion Models" />
-    <meta property="og:author" content="Zewei Zhang" />
-    <meta property="og:author" content="Huan Liu" />
-    <meta property="og:author" content="Jun Chen" />
-    <meta property="og:author" content="Xiangyu Xu" />
-    <meta property="og:description" content="In this paper, we introduce GoodDrag, a novel approach to improve the stability and image quality of drag editing. Unlike existing methods that struggle with accumulated perturbations and often result in distortions, GoodDrag introduces an AlDD framework that alternates between drag and denoising operations within the diffusion process, effectively improving the fidelity of the result. We also propose an information-preserving motion supervision operation that maintains the original features of the starting point for precise manipulation and artifact reduction. In addition, we contribute to the benchmarking of drag editing by introducing a new dataset, Drag100, and developing dedicated quality assessment metrics, Dragging Accuracy Index and Gemini Score, utilizing Large Multimodal Models. Extensive experiments demonstrate that the proposed GoodDrag compares favorably against the state-of-the-art approaches both qualitatively and quantitatively. The source code and data have been released."/>
+    <meta property="og:title" content="A Unified Manifold Framework for Modeling Chinese Script Evolution with Application to Oracle Bone Decipherment" />
+    <meta property="og:description" content="We propose the Manifold-based Script Evolution Framework (MSEF), the first unified framework that models the evolution series of Chinese characters as the continual evolution of a manifold space. MSEF achieves state-of-the-art performance on oracle bone decipherment tasks."/>
 
-
-<!--    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✋</text></svg>">-->
-    <link rel="icon" href="./img/gooddrag_icon.png" sizes="50x50" type="image/png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>甲</text></svg>">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
-    <link rel="stylesheet" href="css/app.css">
-	<link rel="stylesheet" href="css/fontawesome.all.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
 
-
-	<!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
-  <script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'G-8ZERS5BVPS');
-  </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
@@ -43,364 +25,916 @@
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
-	<script defer src="js/fontawesome.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/synced_video_selector.js"></script>
-    <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
+            padding: 3% 5%;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            min-height: 100vh;
+        }
 
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+        .hero-section {
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c2a 50%, #8b4513 100%);
+            color: #f5e6d3;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(44, 24, 16, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
+        .hero-section::before {
+            content: "甲骨文";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 200px;
+            opacity: 0.05;
+            font-family: 'KaiTi', 'STKaiti', serif;
+            white-space: nowrap;
+        }
+
+        .hero-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .oracle-icon {
+            width: 80px;
+            height: 80px;
+            background: #d4a574;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .author-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .author-list li {
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .author-list a {
+            color: #d4a574;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .author-list a:hover {
+            color: #f5e6d3;
+        }
+
+        .affiliation {
+            font-size: 0.95em;
+            opacity: 0.85;
+            margin-top: 15px;
+        }
+
+        .link-block {
+            display: inline-block;
+            margin: 8px;
+        }
+
+        .link-block a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #d4a574;
+            border-radius: 30px;
+            color: #f5e6d3;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .link-block a:hover {
+            background: #d4a574;
+            color: #2c1810;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 165, 116, 0.4);
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c1810;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #d4a574;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: "◆";
+            color: #d4a574;
+        }
+
+        .abstract-text {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, #ffeaa7 60%);
+            font-weight: 600;
+        }
+
+        .figure-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .figure-caption {
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .results-table {
+            width: 100%;
+        .results-table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .results-table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        .results-table th {
+            background: #2c1810;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .results-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .results-table tr:nth-child(even) {
+            background: #faf8f5;
+        }
+
+        /* 高亮最后一列（用于HUST-OBS表格） */
+        .results-table th:last-child {
+            background: #8b4513;
+        }
+
+        .results-table td:last-child {
+            background: rgba(212, 165, 116, 0.15);
+        }
+
+        /* 方法对比表格 - 高亮MSEF行 */
+        .results-table.method-comparison tbody tr:last-child {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe4c4 100%) !important;
+            font-weight: bold;
+            border: 2px solid #d4a574;
+        }
+
+        .results-table.method-comparison tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-table.method-comparison td:last-child {
+            background: transparent;
+        }
+
+        .method-highlight {
+            color: #8b4513;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+
+        .results-table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .gallery-item {
+            background: #faf8f5;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .gallery-item-caption {
+            padding: 15px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .bibtex-box {
+            background: #1a1a2e;
+            color: #a8dadc;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c2a 100%);
+            color: white;
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #d4a574;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            opacity: 0.85;
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+
+        .evolution-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+            padding: 30px 15px;
+            background: linear-gradient(to right, #fdfcfb, #e2d1c3);
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .era-box {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 90px;
+            flex-shrink: 0;
+        }
+
+        .era-name {
+            font-weight: 600;
+            color: #2c1810;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .era-chinese {
+            font-size: 0.85em;
+            color: #8b4513;
+            margin-top: 3px;
+        }
+
+        .arrow {
+            font-size: 1.3em;
+            color: #d4a574;
+            flex-shrink: 0;
+        }
+
+        .divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #d4a574, transparent);
+            margin: 50px 0;
+        }
+
+        .acknowledgements {
+            font-size: 0.95em;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+            .stat-number {
+                font-size: 1.8em;
+            }
+            .stat-label {
+                font-size: 0.75em;
+            }
+            .stat-card {
+                padding: 20px 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.6em;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .stat-number {
+                font-size: 2em;
+            }
+            .stat-label {
+                font-size: 0.8em;
+            }
+            .stat-card {
+                padding: 20px 15px;
+            }
+            .section-card {
+                padding: 25px;
+            }
+            .evolution-flow {
+                padding: 20px 10px;
+                gap: 5px;
+            }
+            .era-box {
+                padding: 10px 12px;
+                min-width: 70px;
+            }
+            .era-name {
+                font-size: 0.75em;
+            }
+            .era-chinese {
+                font-size: 0.7em;
+            }
+            .arrow {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .stat-number {
+                font-size: 1.6em;
+            }
+            .evolution-flow {
+                justify-content: flex-start;
+            }
+        }
+    </style>
 </head>
 
-<body style="padding: 5%; width: 100%">
-    <div class="container-lg text-center" style="max-width: 1500px; margin: auto;" id="main">
-    <!-- <div class="container" id="main"> -->
-        <div class="row">
-        <h2 class="col-md-12 text-center">
-            <img src="./img/gooddrag_icon.png" alt="Icon" style="height: 100px; width: 100px;"> <b><i>GoodDrag</i></b>: Towards Good Practices for Drag Editing with Diffusion Models<br/>
-        </h2>
-        </div>
-        <div class="row text-center">
-<div class="col-md-3">
-    </div>
-            <div class="col-md-6 text-center">
-                <ul class="list-inline">
-                    <li>
-                        Zewei Zhang<sup>1</sup>
-                    </li>
-                    <li>
-                        Huan Liu<sup>1</sup>
-                    </li>
-                    <li>
-                        <a href="https://www.ece.mcmaster.ca/~junchen/">
-                            Jun Chen
-                        </a><sup>1</sup>
-                    </li>
-                    <li>
-                        <a href="https://xuxy09.github.io/">
-                            Xiangyu Xu
-                        </a><sup>2✉</sup>
-                    </li>
-                    <wbr>
-                    <!-- </br>Google -->
-                </ul>
+<body>
+    <div class="container-lg" style="max-width: 1200px; margin: auto;">
+        
+        <!-- Hero Section -->
+        <div class="hero-section text-center">
+            <div class="oracle-icon" style="margin: 0 auto 20px auto;">甲</div>
+            <h1 class="hero-title">
+                A Unified Manifold Framework for Modeling Chinese Script Evolution<br/>
+                with Application to Oracle Bone Decipherment
+            </h1>
+            <p class="hero-subtitle">ICML 2026 Submission</p>
+            
+            <ul class="author-list">
+                <li>Author 1<sup>1*</sup></li>
+                <li>Author 2<sup>1*</sup></li>
+                <li>Author 3<sup>2</sup></li>
+                <li>Author 4<sup>1</sup></li>
+            </ul>
+            
+            <div class="affiliation">
+                <sup>1</sup>University A &nbsp;&nbsp; <sup>2</sup>University B<br/>
+                <small>* Equal contribution</small>
             </div>
-<div class="col-md-3">
-    </div>
-            <div class="col-md-12 text-center">
-                <sup>1</sup>McMaster University, &nbsp <sup>2</sup>Xi’an Jiaotong University, &nbsp
 
-            </div>
-            <div class="col-md-12 text-center">
-                ✉ Project Lead, Corresponding Author
-            </div> </div>
-
-
-        <div class="row text-center">
-            <span class="link-block">
-                <a href="https://arxiv.org/abs/2404.07206" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
+            <div style="margin-top: 30px;">
+                <span class="link-block">
+                    <a href="https://arxiv.org/abs/XXXX.XXXXX">
                         <i class="ai ai-arxiv"></i>
-                    </span>
-                    <span>arXiv</span>
-                </a>
-            </span>
-			<span class="link-block">
-			  <a href="https://openreview.net/pdf?id=VtYfbvwpWp" class="external-link button is-normal is-rounded is-dark">
-			    <span class="icon">
-			      <i class="fas fa-file-pdf"></i>
-			    </span>
-			    <span>Paper</span>
-			  </a>
-			</span>
-            <span class="link-block">
-                <a href="https://github.com/zewei-Zhang/GoodDrag" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
+                        <span>arXiv</span>
+                    </a>
+                </span>
+                <span class="link-block">
+                    <a href="#">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Paper</span>
+                    </a>
+                </span>
+                <span class="link-block">
+                    <a href="https://github.com/YOUR_USERNAME/MSEF">
                         <i class="fab fa-github"></i>
-                    </span>
-                    <span>GitHub</span>
-                </a>
-            </span>
-             <span class="link-block">
-                <a href="https://colab.research.google.com/drive/1eoX-AngrcHocLKAgL5g5fyseLW_DusWl?usp=sharing" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        <i class="fas fa-play"></i>
-                    </span>
-                    <span>Colab</span>
-                </a>
-            </span>
-            <span class="link-block">
-                <a href="https://drive.google.com/file/d/1qzUizzrSRd4bBaT-0bCYZr-MDpiKXjhW/view?usp=sharing" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        <i class="fas fa-cloud"></i>
-                    </span>
-                    <span>Dataset</span>
-                </a>
-            </span>
-        </div>
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-12 text-center">-->
-<!--                &lt;!&ndash; Video container with scaled size and centered &ndash;&gt;-->
-<!--                <div style="max-width: 65%; margin: auto;"> &lt;!&ndash; Adjust the max-width as needed &ndash;&gt;-->
-<!--                    <video controls style="width: 100%; display: block;">-->
-<!--                        <source src="./videos/GoodDrag_demo.mov" type="video/mp4">-->
-<!--                        Your browser does not support the video tag.-->
-<!--                    </video>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <br><br>-->
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-<!--                <h3>-->
-<!--				  <b> <font color="#118ab2">Recon</font><font color="#ef486e">Fusion</font></b> = <font color="#118ab2">3D Reconstruction</font>  + <font color="#ef486e">Diffusion Prior</font>-->
-<!--                </h3>-->
-                <image src="img/gooddrag_1.jpg" width=100% style="display: block; margin: auto;"></image>
+                        <span>Code</span>
+                    </a>
+                </span>
+                <span class="link-block">
+                    <a href="#">
+                        <i class="fas fa-database"></i>
+                        <span>Dataset</span>
+                    </a>
+                </span>
             </div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <!-- Video container with scaled size and centered -->
-                <div style="max-width: 65%; margin: auto;"> <!-- Adjust the max-width as needed -->
-                    <video controls style="width: 100%; display: block;">
-                        <source src="./videos/GoodDrag_demo.mov" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+
+        <!-- Key Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">72.5%</div>
+                <div class="stat-label">Top-1 Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+9.7</div>
+                <div class="stat-label">vs. SOTA (points)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">13.7K</div>
+                <div class="stat-label">Cross-Era Pairs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Historical Eras</div>
             </div>
         </div>
-        <br><br>
 
+        <!-- Evolution Flow Visualization -->
+        <div class="evolution-flow">
+            <div class="era-box">
+                <div class="era-name">Oracle Bone</div>
+                <div class="era-chinese">甲骨文</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="era-box">
+                <div class="era-name">Bronze</div>
+                <div class="era-chinese">金文</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="era-box">
+                <div class="era-name">Seal Script</div>
+                <div class="era-chinese">篆书</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="era-box">
+                <div class="era-name">Clerical</div>
+                <div class="era-chinese">隶书</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="era-box">
+                <div class="era-name">Regular</div>
+                <div class="era-chinese">楷书</div>
+            </div>
+        </div>
 
-        <hr class="divider" />
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Abstract
-                </h3>
-                <p class="text-justify">
-                    In this paper, we introduce GoodDrag, a novel approach to improve the stability and image quality of drag editing. Unlike existing methods that struggle with accumulated perturbations and often result in distortions, GoodDrag introduces an AlDD framework that alternates between drag and denoising operations within the diffusion process, effectively improving the fidelity of the result. We also propose an information-preserving motion supervision operation that maintains the original features of the starting point for precise manipulation and artifact reduction. In addition, we contribute to the benchmarking of drag editing by introducing a new dataset, Drag100, and developing dedicated quality assessment metrics, Dragging Accuracy Index and Gemini Score, utilizing Large Multimodal Models. Extensive experiments demonstrate that the proposed GoodDrag compares favorably against the state-of-the-art approaches both qualitatively and quantitatively. The source code and data will be released.
+        <!-- Abstract -->
+        <div class="section-card">
+            <h2 class="section-title">Abstract</h2>
+            <p class="abstract-text">
+                Of the approximately <span class="highlight">4,500 Oracle Bone Inscription (OBI) characters</span> discovered from the Shang dynasty, only about 1,500 have been deciphered. Existing computational methods mainly compute similarity between OBI and single historical period characters independently. However, during Chinese character evolution, significant structural or semantic changes frequently occur at uncertain dynasties. Relying solely on a single dynasty for reference leads to numerous deciphering errors.
+            </p>
+            <p class="abstract-text" style="margin-top: 15px;">
+                In this paper, we propose the <span class="highlight">Manifold-based Script Evolution Framework (MSEF)</span>, the first unified framework that models the evolution series (OBI, Bronze, Seal, Clerical, Regular) of Chinese characters as the continual evolution of a manifold space. MSEF represents each character as an era-specific manifold point and learns continuous inter-era transition rules via <strong>Neural Ordinary Differential Equations</strong>. To support this training scheme, we construct the first unified cross-era dataset with fine-grained temporal and regional granularity.
+            </p>
+            <p class="abstract-text" style="margin-top: 15px;">
+                Based on MSEF, we propose the <span class="highlight">Cascaded Bidirectional Evolutional Decipherment (CBED)</span> algorithm, where forward predictions recall potential candidates and backward consistency checking filters false matches—effectively avoiding errors caused by single-dynasty comparisons. Experiments on three commonly used benchmarks demonstrate that MSEF achieves <strong>state-of-the-art performance</strong> among all current oracle deciphering algorithms.
+            </p>
+        </div>
+
+        <!-- Framework Overview -->
+        <div class="section-card">
+            <h2 class="section-title">Method Overview</h2>
+            <div class="figure-container">
+                <img src="./img/fig_framework_overview.png" alt="MSEF Framework Overview">
+                <p class="figure-caption">
+                    <strong>Overview of MSEF.</strong> 
+                    <strong>Top:</strong> The framework models the 3,000-year evolution of Chinese script as a continuous trajectory through era-specific manifolds, conditioned on normalized time t (from OBI t=0.0 to Regular t=1.0). Neural ODEs govern the continuous transitions via forward flows φ and backward flows ψ.
+                    <strong>Bottom:</strong> Cascaded Bidirectional Decipherment consists of forward cascade retrieval and backward verification with step-wise pruning.
                 </p>
             </div>
         </div>
-        <br>
 
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Method
-                </h3>
-                <image src="img/teaserv2.jpg" width=60% style="display: block; margin: auto;"></image>
-                <br>
-                <p class="text-justify">
-    Existing diffusion-based drag editing methods (dotted trajectory), typically perform all drag operations at once, followed by denoising steps to correct the resulting perturbations. However, this approach often leads to accumulated perturbations that are too substantial for high-fidelity correction.
-In contrast, the proposed AlDD framework (solid trajectory) alternates between drag and denoising operations within the diffusion process, effectively preventing the accumulation of large perturbations and ensuring more accurate editing results.
-The drag operation modifies the image to achieve the desired dragging effect but introduces perturbations that deviate the intermediate result from the natural image manifold.
-The denoising operation, on the other hand, is trained to estimate the score function of the natural image distribution, guiding intermediate results back to the image manifold.
-</p>
-            </div>
-        </div>
-        <br><br>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <image src="img/alddv2.jpg" width=100% style="display: block; margin: auto;"></image>
-                <br>
-                <p class="text-justify">
-    Overview of the proposed AlDD framework.
-    (a) Existing methods first perform all drag editing operations \( \{g_k\}_{k=1}^K \) at a single time step \( T \) and subsequently apply all denoising operations \( \{f_t\}_{t=T}^1 \) to transform the edited image \( z_T^K \) into the VAE image space.
-    (b) To mitigate the accumulated perturbations in (a), AlDD alternates between the drag operation \( g \) and the diffusion denoising operation \( f \), which leads to higher quality results. Specifically, we apply one denoising operation after every \( B \) drag steps and ensure the total number of drag steps \( K \) is divisible by \( B \).
-    We set \( B=2 \) in this figure for clarity.
-</p>
-            </div>
-        </div>
-        <br><br>
-<!--            <hr class="divider" />-->
-<!--         <div class="row">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <h3>-->
-<!--                    Comparison against SOTA-->
-<!--                </h3>-->
-<!--                <image src="img/comparison.jpg" width=100% style="display: block; margin: auto;"></image>-->
-<!--                <br>-->
-<!--            </div>-->
-<!--        </div>-->
-        <hr class="divider" />
-<div class="row">
-    <div class="col-12">
-        <h3 style="text-align: center;">
-            Comparison against SOTA
-        </h3>
-        <div style="text-align: center;"> <!-- Center align the container of the image -->
-            <img src="img/comparison.jpg" alt="Comparison" style="width: auto; max-width: 77.5%; height: auto; margin: auto;"> <!-- Use margin auto to center the image -->
-        </div>
-    </div>
-</div>
-        <br>
-        <br><br>
-
-
-<style>
-/* Adjusted custom styling for spacing */
-.img-video-container {
-    padding: 5px; /* Reduced padding for a closer fit within groups */
-}
-
-.img-video-container img,
-.img-video-container video {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* New class to add more space between groups */
-.space-between-groups {
-    margin-right: 10px; /* Adds space to the right of the first group */
-}
-
-.group-separator {
-    margin-bottom: 5px; /* Space between rows */
-}
-</style>
-
-<div class="container">
-    <!-- Row 1 -->
-    <h3>
-        Visualization of the Dragging Process
-    </h3>
-    <div class="row group-separator">
-        <!-- Group 1 -->
-        <div class="col-md-2 img-video-container">
-            <img src="./img/fox_1_original.jpg" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <img src="./img/fox_1.png" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <video controls style="width: 100%;">
-                <source src="./videos/fox_1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <!-- Group 2 -->
-        <div class="col-md-2 img-video-container">
-            <img src="./img/generated_2_squirrel_original.jpg" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <img src="./img/generated_2_squirrel.png" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <video controls style="width: 100%;">
-                <source src="./videos/generated_2_squirrel.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </div>
-
-        <div class="row group-separator">
-        <!-- Group 1 -->
-        <div class="col-md-2 img-video-container">
-            <img src="./img/hummingbird_0_original.jpg" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <img src="./img/hummingbird_0.png" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <video controls style="width: 100%;">
-                <source src="./videos/hummingbird_0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <!-- Group 2 -->
-        <div class="col-md-2 img-video-container">
-            <img src="./img/drink_0_original.jpg" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <img src="./img/drink_0.png" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <video controls style="width: 100%;">
-                <source src="./videos/drink_0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </div>
-
-        <div class="row group-separator">
-        <!-- Group 1 -->
-                    <!-- Group 2 -->
-        <div class="col-md-2 img-video-container">
-            <img src="./img/cat_0_original.jpg" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <img src="./img/cat_0.png" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <video controls style="width: 100%;">
-                <source src="./videos/cat_0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <div class="col-md-2 img-video-container">
-            <img src="./img/nature_2_original.jpg" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <img src="./img/nature_2.png" alt="Image 1">
-        </div>
-        <div class="col-md-2 img-video-container">
-            <video controls style="width: 100%;">
-                <source src="./videos/nature_2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-    </div>
-    <!-- Additional rows with the same structure for more images/videos -->
-
-</div>
-
-
-        <br><br>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Citation
-                </h3>
-                <div class="form-group col-md-10 col-md-offset-1">
-				  <p class="text-justify">
-                    <textarea id="bibtex" class="form-control" readonly>
-@inproceedings{zhang2025gooddrag,
-    title={GoodDrag: Towards Good Practices for Drag Editing with Diffusion Models},
-    author={Zewei Zhang and Huan Liu and Jun Chen and Xiangyu Xu},
-    booktitle={The Thirteenth International Conference on Learning Representations},
-    year={2025},
-}</textarea></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Acknowledgements
-                </h3>
-                <p class="text-justify">
-                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a>, <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a> and <a href="https://reconfusion.github.io/">ReconFusion</a>.
+        <!-- Data Statistics -->
+        <div class="section-card">
+            <h2 class="section-title">Data Availability</h2>
+            <div class="figure-container">
+                <img src="./img/fig_data_stats.png" alt="Data Statistics" style="max-width: 80%;">
+                <p class="figure-caption">
+                    <strong>Left:</strong> Discovered vs. deciphered characters (OBI: only 35.6% deciphered). 
+                    <strong>Right:</strong> Only ~1,500 complete chains exist across all five eras, but 13.7K partial pairs are available. MSEF leverages all partial pairs.
                 </p>
             </div>
         </div>
+
+        <!-- Representative Trajectories -->
+        <div class="section-card">
+            <h2 class="section-title">Evolutionary Trajectories</h2>
+            <div class="figure-container">
+                <img src="./img/fig3.png" alt="Representative Evolutionary Trajectories">
+                <p class="figure-caption">
+                    <strong>Representative Evolutionary Trajectories.</strong> This grid visualizes the evolution of diverse characters across five historical eras. While stylistic features shift dramatically from pictographic OBI forms to standardized Regular scripts, the underlying structural correspondences remain traceable.
+                </p>
+            </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Main Results -->
+        <div class="section-card">
+            <h2 class="section-title">Main Results</h2>
+            
+            <h4 style="color: #2c1810; margin-top: 30px;">Results on HUST-OBS and EVOBC Benchmarks</h4>
+            <div class="results-table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Evaluation</th>
+                        <th>Metric</th>
+                        <th>Pix2Pix</th>
+                        <th>CycleGAN</th>
+                        <th>BBDM</th>
+                        <th>CDE</th>
+                        <th>OBSD</th>
+                        <th>MSEF (Ours)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-1</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>19.5</td>
+                        <td>31.0</td>
+                        <td>41.0</td>
+                        <td class="method-highlight">71.5</td>
+                    </tr>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-10</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>29.5</td>
+                        <td>47.5</td>
+                        <td>50.5</td>
+                        <td class="method-highlight">82.0</td>
+                    </tr>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-20</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>34.5</td>
+                        <td>50.0</td>
+                        <td>54.5</td>
+                        <td class="method-highlight">84.5</td>
+                    </tr>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-50</td>
+                        <td>4.5</td>
+                        <td>8.5</td>
+                        <td>39.0</td>
+                        <td>52.5</td>
+                        <td>58.0</td>
+                        <td class="method-highlight">86.5</td>
+                    </tr>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-100</td>
+                        <td>13.0</td>
+                        <td>19.0</td>
+                        <td>42.0</td>
+                        <td>56.0</td>
+                        <td>61.0</td>
+                        <td class="method-highlight">88.0</td>
+                    </tr>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-200</td>
+                        <td>20.0</td>
+                        <td>37.5</td>
+                        <td>46.0</td>
+                        <td>59.5</td>
+                        <td>62.5</td>
+                        <td class="method-highlight">89.0</td>
+                    </tr>
+                    <tr>
+                        <td>OBS-OCR</td>
+                        <td>Top-500</td>
+                        <td>21.5</td>
+                        <td>60.0</td>
+                        <td>58.0</td>
+                        <td>64.0</td>
+                        <td>64.5</td>
+                        <td class="method-highlight">90.0</td>
+                    </tr>
+                    <tr>
+                        <td>PaddleOCR</td>
+                        <td>Top-1</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>7.0</td>
+                        <td>19.0</td>
+                        <td>30.0</td>
+                        <td class="method-highlight">58.5</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <h4 style="color: #2c1810; margin-top: 40px;">Comparison with LMMs on PictOBI-20k</h4>
+            <div class="results-table-container">
+            <table class="results-table method-comparison">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Params</th>
+                        <th>Normal</th>
+                        <th>Complex</th>
+                        <th>Overall</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f5f5f5; font-style: italic;">
+                        <td>Random (4-choice)</td>
+                        <td>—</td>
+                        <td>25.00</td>
+                        <td>25.00</td>
+                        <td>25.00</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-4o-2024-11-20</td>
+                        <td>&gt;100B</td>
+                        <td>26.31</td>
+                        <td>25.52</td>
+                        <td>26.23</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini 2.5 Pro</td>
+                        <td>&gt;50B</td>
+                        <td>55.22</td>
+                        <td>39.44</td>
+                        <td>53.66</td>
+                    </tr>
+                    <tr>
+                        <td>Claude 4 Sonnet</td>
+                        <td>—</td>
+                        <td>35.93</td>
+                        <td>25.92</td>
+                        <td>34.94</td>
+                    </tr>
+                    <tr>
+                        <td>GLM-4.5V-106B</td>
+                        <td>106B</td>
+                        <td>33.19</td>
+                        <td>27.11</td>
+                        <td>32.48</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-VL-72B</td>
+                        <td>72B</td>
+                        <td>25.41</td>
+                        <td>24.98</td>
+                        <td>25.36</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-78B</td>
+                        <td>78B</td>
+                        <td>52.29</td>
+                        <td>36.38</td>
+                        <td>50.71</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-38B</td>
+                        <td>38B</td>
+                        <td>52.71</td>
+                        <td>39.51</td>
+                        <td>51.40</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MSEF (Ours)</strong></td>
+                        <td><strong>12M</strong></td>
+                        <td class="method-highlight">74.82</td>
+                        <td class="method-highlight">53.24</td>
+                        <td class="method-highlight">72.18</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <h4 style="color: #2c1810; margin-top: 40px;">Results on FGCCES Benchmark</h4>
+            <div class="results-table-container">
+            <table class="results-table method-comparison">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>R@1</th>
+                        <th>R@5</th>
+                        <th>R@10</th>
+                        <th>R@1%</th>
+                        <th>AP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Diff-Oracle (2023)</td>
+                        <td>52.1</td>
+                        <td>68.9</td>
+                        <td>77.4</td>
+                        <td>85.2</td>
+                        <td>0.56</td>
+                    </tr>
+                    <tr>
+                        <td>OracleFusion (2025)</td>
+                        <td>58.3</td>
+                        <td>74.5</td>
+                        <td>81.2</td>
+                        <td>88.1</td>
+                        <td>0.62</td>
+                    </tr>
+                    <tr>
+                        <td>CrossFont (2025)</td>
+                        <td>54.6</td>
+                        <td>70.8</td>
+                        <td>78.5</td>
+                        <td>86.5</td>
+                        <td>0.58</td>
+                    </tr>
+                    <tr>
+                        <td>OracleSage (2024)</td>
+                        <td>60.1</td>
+                        <td>76.2</td>
+                        <td>82.8</td>
+                        <td>89.5</td>
+                        <td>0.64</td>
+                    </tr>
+                    <tr>
+                        <td>OracleAgent (2025)</td>
+                        <td>62.8</td>
+                        <td>77.9</td>
+                        <td>84.6</td>
+                        <td>90.8</td>
+                        <td>0.67</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MSEF (Ours)</strong></td>
+                        <td class="method-highlight">72.5</td>
+                        <td class="method-highlight">86.5</td>
+                        <td class="method-highlight">91.8</td>
+                        <td class="method-highlight">95.6</td>
+                        <td class="method-highlight">0.78</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Bidirectional Verification -->
+        <div class="section-card">
+            <h2 class="section-title">Bidirectional Verification</h2>
+            <div class="figure-container">
+                <img src="./img/fig4.png" alt="Bidirectional Verification" style="max-width: 85%;">
+                <p class="figure-caption">
+                    <strong>Visualization of Bidirectional Verification.</strong> The figure illustrates the decipherment process for the character "水" (water). The similarity heatmap displays the confidence scores between the query OBI and the backward-projected features of retrieved Bronze candidates. The correct candidate exhibits a dominant consistency score (0.99), distinguishing it from incorrect distractors.
+                </p>
+            </div>
+        </div>
+
+        <!-- Retrieval Gallery -->
+        <div class="section-card">
+            <h2 class="section-title">Retrieval Gallery</h2>
+            <div class="figure-container">
+                <img src="./img/gallery_full.png" alt="Retrieval Gallery">
+                <p class="figure-caption">
+                    <strong>Comprehensive Retrieval Gallery.</strong> Top-5 Bronze candidates retrieved for 40 representative OBI queries across diverse categories (Nature, Animals, Body Parts, People, Artifacts). The green box indicates ground truth. MSEF demonstrates robust retrieval capabilities across different categories.
+                </p>
+            </div>
+        </div>
+
+        <!-- Manifold Visualization -->
+        <div class="section-card">
+            <h2 class="section-title">Manifold Neighborhood Visualization</h2>
+            <div class="figure-container">
+                <img src="./img/manifold_neighborhood.png" alt="Manifold Neighborhood">
+                <p class="figure-caption">
+                    <strong>Manifold Neighborhood Visualization.</strong> 
+                    <strong>Left:</strong> Neighborhoods in the OBI era (t=0). 
+                    <strong>Right:</strong> Neighborhoods in the Bronze era (t=0.3). 
+                    Dense clustering of visually and semantically related characters validates that the manifold encodes the intrinsic geometric structure of Chinese script evolution.
+                </p>
+            </div>
+        </div>
+
+        <!-- Fine-Grained Dataset -->
+        <div class="section-card">
+            <h2 class="section-title">Fine-Grained Dataset</h2>
+            <div class="figure-container">
+                <img src="./img/dataset_finegrained.png" alt="Fine-Grained Dataset">
+                <p class="figure-caption">
+                    <strong>Fine-Grained Evolutionary Trajectories.</strong> 
+                    Unlike prior datasets with single representative glyphs per era, our dataset preserves intra-era diversity with scribal group annotations for OBI and sub-period classifications for Bronze inscriptions.
+                </p>
+            </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Citation -->
+        <div class="section-card">
+            <h2 class="section-title">Citation</h2>
+            <div class="bibtex-box">@inproceedings{anonymous2025msef,
+    title={A Unified Manifold Framework for Modeling Chinese Script Evolution with Application to Oracle Bone Decipherment},
+    author={Anonymous},
+    booktitle={International Conference on Machine Learning (ICML)},
+    year={2026},
+}</div>
+        </div>
+
+        <!-- Acknowledgements -->
+        <div class="acknowledgements">
+            <p>
+                The website template was inspired by <a href="https://zewei-zhang.github.io/GoodDrag/">GoodDrag</a>, 
+                <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>, and 
+                <a href="https://reconfusion.github.io/">ReconFusion</a>.
+            </p>
+        </div>
+
     </div>
 </body>
 </html>
