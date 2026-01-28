@@ -70,19 +70,6 @@
             font-style: italic;
         }
 
-        .oracle-icon {
-            width: 80px;
-            height: 80px;
-            background: #d4a574;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
         .author-list {
             list-style: none;
             padding: 0;
@@ -199,68 +186,68 @@
             width: 100%;
         .results-table-container {
             overflow-x: auto;
-            margin: 20px 0;
+            margin: 25px 0;
             -webkit-overflow-scrolling: touch;
         }
 
         .results-table {
             width: 100%;
-            min-width: 700px;
             border-collapse: collapse;
             margin: 0;
+            font-size: 0.9em;
         }
 
         .results-table th {
             background: #2c1810;
             color: white;
-            padding: 15px;
+            padding: 12px 10px;
             text-align: center;
             font-size: 0.9em;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
         .results-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e0e0;
             text-align: center;
+            white-space: nowrap;
         }
 
-        .results-table tr:nth-child(even) {
+        .results-table tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+
+        .results-table tbody tr:nth-child(even) {
             background: #faf8f5;
         }
 
-        /* 高亮最后一列（用于HUST-OBS表格） */
-        .results-table th:last-child {
-            background: #8b4513;
+        .results-table tbody tr:hover {
+            background: #f5f0eb;
         }
 
-        .results-table td:last-child {
-            background: rgba(212, 165, 116, 0.15);
-        }
-
-        /* 方法对比表格 - 高亮MSEF行 */
-        .results-table.method-comparison tbody tr:last-child {
+        /* 高亮MSEF行 */
+        .results-table tbody tr.highlight-row,
+        .results-table tbody tr:last-child {
             background: linear-gradient(135deg, #fff3e0 0%, #ffe4c4 100%) !important;
-            font-weight: bold;
-            border: 2px solid #d4a574;
+            font-weight: 600;
         }
 
-        .results-table.method-comparison tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .results-table.method-comparison td:last-child {
-            background: transparent;
+        .results-table tbody tr.highlight-row td,
+        .results-table tbody tr:last-child td {
+            border-bottom: 2px solid #d4a574;
         }
 
         .method-highlight {
             color: #8b4513;
-            font-weight: bold;
-            font-size: 1.05em;
+            font-weight: 700;
         }
 
-        .results-table-container {
-            overflow-x: auto;
-            margin: 20px 0;
+        /* 第一列左对齐 */
+        .results-table td:first-child,
+        .results-table th:first-child {
+            text-align: left;
+            padding-left: 15px;
         }
 
         .gallery-grid {
@@ -305,77 +292,6 @@
             line-height: 1.6;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #2c1810 0%, #4a2c2a 100%);
-            color: white;
-            padding: 25px 15px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #d4a574;
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            font-size: 0.85em;
-            opacity: 0.85;
-            margin-top: 8px;
-            line-height: 1.3;
-        }
-
-        .evolution-flow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: nowrap;
-            padding: 30px 15px;
-            background: linear-gradient(to right, #fdfcfb, #e2d1c3);
-            border-radius: 12px;
-            margin: 20px 0;
-            overflow-x: auto;
-        }
-
-        .era-box {
-            background: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            min-width: 90px;
-            flex-shrink: 0;
-        }
-
-        .era-name {
-            font-weight: 600;
-            color: #2c1810;
-            font-size: 0.9em;
-            white-space: nowrap;
-        }
-
-        .era-chinese {
-            font-size: 0.85em;
-            color: #8b4513;
-            margin-top: 3px;
-        }
-
-        .arrow {
-            font-size: 1.3em;
-            color: #d4a574;
-            flex-shrink: 0;
-        }
-
         .divider {
             border: none;
             height: 2px;
@@ -390,71 +306,12 @@
             padding: 20px;
         }
 
-        @media (max-width: 992px) {
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 15px;
-            }
-            .stat-number {
-                font-size: 1.8em;
-            }
-            .stat-label {
-                font-size: 0.75em;
-            }
-            .stat-card {
-                padding: 20px 10px;
-            }
-        }
-
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 1.6em;
             }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .stat-number {
-                font-size: 2em;
-            }
-            .stat-label {
-                font-size: 0.8em;
-            }
-            .stat-card {
-                padding: 20px 15px;
-            }
             .section-card {
                 padding: 25px;
-            }
-            .evolution-flow {
-                padding: 20px 10px;
-                gap: 5px;
-            }
-            .era-box {
-                padding: 10px 12px;
-                min-width: 70px;
-            }
-            .era-name {
-                font-size: 0.75em;
-            }
-            .era-chinese {
-                font-size: 0.7em;
-            }
-            .arrow {
-                font-size: 1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            .stat-number {
-                font-size: 1.6em;
-            }
-            .evolution-flow {
-                justify-content: flex-start;
             }
         }
     </style>
@@ -465,7 +322,6 @@
         
         <!-- Hero Section -->
         <div class="hero-section text-center">
-            <div class="oracle-icon" style="margin: 0 auto 20px auto;">甲</div>
             <h1 class="hero-title">
                 A Unified Manifold Framework for Modeling Chinese Script Evolution<br/>
                 with Application to Oracle Bone Decipherment
@@ -473,20 +329,16 @@
             <p class="hero-subtitle">ICML 2026 Submission</p>
             
             <ul class="author-list">
-                <li>Author 1<sup>1*</sup></li>
-                <li>Author 2<sup>1*</sup></li>
-                <li>Author 3<sup>2</sup></li>
-                <li>Author 4<sup>1</sup></li>
+                <li>Anonymous Authors</li>
             </ul>
             
             <div class="affiliation">
-                <sup>1</sup>University A &nbsp;&nbsp; <sup>2</sup>University B<br/>
-                <small>* Equal contribution</small>
+                Anonymous Institution
             </div>
 
             <div style="margin-top: 30px;">
                 <span class="link-block">
-                    <a href="https://arxiv.org/abs/XXXX.XXXXX">
+                    <a href="#">
                         <i class="ai ai-arxiv"></i>
                         <span>arXiv</span>
                     </a>
@@ -498,7 +350,7 @@
                     </a>
                 </span>
                 <span class="link-block">
-                    <a href="https://github.com/YOUR_USERNAME/MSEF">
+                    <a href="#">
                         <i class="fab fa-github"></i>
                         <span>Code</span>
                     </a>
@@ -509,54 +361,6 @@
                         <span>Dataset</span>
                     </a>
                 </span>
-            </div>
-        </div>
-
-        <!-- Key Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">72.5%</div>
-                <div class="stat-label">Top-1 Accuracy</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">+9.7</div>
-                <div class="stat-label">vs. SOTA (points)</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">13.7K</div>
-                <div class="stat-label">Cross-Era Pairs</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Historical Eras</div>
-            </div>
-        </div>
-
-        <!-- Evolution Flow Visualization -->
-        <div class="evolution-flow">
-            <div class="era-box">
-                <div class="era-name">Oracle Bone</div>
-                <div class="era-chinese">甲骨文</div>
-            </div>
-            <span class="arrow">→</span>
-            <div class="era-box">
-                <div class="era-name">Bronze</div>
-                <div class="era-chinese">金文</div>
-            </div>
-            <span class="arrow">→</span>
-            <div class="era-box">
-                <div class="era-name">Seal Script</div>
-                <div class="era-chinese">篆书</div>
-            </div>
-            <span class="arrow">→</span>
-            <div class="era-box">
-                <div class="era-name">Clerical</div>
-                <div class="era-chinese">隶书</div>
-            </div>
-            <span class="arrow">→</span>
-            <div class="era-box">
-                <div class="era-name">Regular</div>
-                <div class="era-chinese">楷书</div>
             </div>
         </div>
 
@@ -601,11 +405,11 @@
 
         <!-- Representative Trajectories -->
         <div class="section-card">
-            <h2 class="section-title">Evolutionary Trajectories</h2>
+            <h2 class="section-title">Fine-Grained Evolutionary Trajectories</h2>
             <div class="figure-container">
-                <img src="./img/fig3.png" alt="Representative Evolutionary Trajectories">
+                <img src="./img/dataset_finegrained.png" alt="Fine-Grained Evolutionary Trajectories">
                 <p class="figure-caption">
-                    <strong>Representative Evolutionary Trajectories.</strong> This grid visualizes the evolution of diverse characters across five historical eras. While stylistic features shift dramatically from pictographic OBI forms to standardized Regular scripts, the underlying structural correspondences remain traceable.
+                    <strong>Fine-Grained Evolutionary Trajectories.</strong> Unlike prior datasets with single representative glyphs per era, our dataset preserves intra-era diversity with scribal group annotations for OBI and sub-period classifications for Bronze inscriptions.
                 </p>
             </div>
         </div>
@@ -718,7 +522,7 @@
 
             <h4 style="color: #2c1810; margin-top: 40px;">Comparison with LMMs on PictOBI-20k</h4>
             <div class="results-table-container">
-            <table class="results-table method-comparison">
+            <table class="results-table">
                 <thead>
                     <tr>
                         <th>Model</th>
@@ -729,7 +533,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="background: #f5f5f5; font-style: italic;">
+                    <!-- <tr style="background: #f5f5f5; font-style: italic;"> -->
                         <td>Random (4-choice)</td>
                         <td>—</td>
                         <td>25.00</td>
@@ -798,7 +602,7 @@
 
             <h4 style="color: #2c1810; margin-top: 40px;">Results on FGCCES Benchmark</h4>
             <div class="results-table-container">
-            <table class="results-table method-comparison">
+            <table class="results-table">
                 <thead>
                     <tr>
                         <th>Method</th>
