@@ -306,6 +306,42 @@
             padding: 20px;
         }
 
+        .dataset-notice {
+            background: linear-gradient(135deg, #f8f4e8 0%, #f0e6d3 100%);
+            border-left: 4px solid #d4a574;
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 0.95em;
+            color: #5a4a3a;
+        }
+
+        .dataset-notice strong {
+            color: #2c1810;
+        }
+
+        .dataset-list {
+            margin: 15px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .dataset-list li {
+            margin: 8px 0;
+        }
+
+        .dataset-list a {
+            color: #8b4513;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #8b4513;
+            transition: all 0.3s;
+        }
+
+        .dataset-list a:hover {
+            color: #2c1810;
+            border-bottom-style: solid;
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 1.6em;
@@ -350,13 +386,13 @@
                     </a>
                 </span>
                 <span class="link-block">
-                    <a href="#">
+                    <a href="https://github.com/icml26-oracle/icml26-oracle">
                         <i class="fab fa-github"></i>
                         <span>Code</span>
                     </a>
                 </span>
                 <span class="link-block">
-                    <a href="#">
+                    <a href="https://github.com/icml26-oracle/icml26-oracle/blob/main/data_mini.zip">
                         <i class="fas fa-database"></i>
                         <span>Dataset</span>
                     </a>
@@ -400,6 +436,14 @@
                     <strong>Left:</strong> Discovered vs. deciphered characters (OBI: only 35.6% deciphered). 
                     <strong>Right:</strong> Only ~1,500 complete chains exist across all five eras, but 13.7K partial pairs are available. MSEF leverages all partial pairs.
                 </p>
+            </div>
+            
+            <div class="dataset-notice">
+                <strong>📦 Dataset Download</strong>
+                <ul class="dataset-list">
+                    <li><a href="https://github.com/icml26-oracle/icml26-oracle/blob/main/data_mini.zip" target="_blank"><strong>Mini Version</strong></a> — A lightweight subset for quick experimentation and validation.</li>
+                    <li><strong>Full Version</strong> — Due to file size limitations on GitHub, the complete dataset will be released in the next version. Stay tuned!</li>
+                </ul>
             </div>
         </div>
 
